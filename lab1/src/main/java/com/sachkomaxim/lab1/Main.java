@@ -6,15 +6,15 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         final int[][] EXAMPLE_A = {
-                {1, 2, 3, 4},
-                {4, 5, 6, 8},
-                {7, 8, 9, 8}
+                {1, 48, 3, 18},
+                {6, 55, 6, 22},
+                {27, 8, 49, 8}
         };
 
         final int[][] EXAMPLE_B = {
-                {9, 8, 7, 4},
-                {6, 5, 4, 1},
-                {3, 2, 1, 7}
+                {9, 8, 7, 16},
+                {6, 70, 17, 1},
+                {3, 5, 41, 22}
         };
 
         int[][] A;
