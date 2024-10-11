@@ -29,4 +29,6 @@ java -cp target/lab2-1.0-SNAPSHOT.jar com.sachkomaxim.lab2.Main
 ```
 
 Тобто, треба це все писати тут:
+![image](https://github.com/user-attachments/assets/b1daf902-10fd-4f46-ae77-f1c2fbb3c14a)
+
 
