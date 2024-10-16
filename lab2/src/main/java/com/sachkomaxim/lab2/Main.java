@@ -1,11 +1,9 @@
 package com.sachkomaxim.lab2;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
         try (Scanner scanner = new Scanner(System.in)) {
             StringBuffer text = getInputText(scanner);
             StringBuffer targetChar = getInputChar(scanner);
@@ -40,18 +38,15 @@ public class Main {
     }
 
     public static StringBuffer sortWordsByCharCount(StringBuffer text, StringBuffer targetChar) {
-        // Розбиття тексту на слова разом із розділовими знаками
-        ArrayList<StringBuffer> wordsAndPunctuation = splitTextAndPunctuation(text);
+        StringBuffer[] wordsAndPunctuation = splitTextAndPunctuation(text);
+        StringBuffer[] sortedWords = sortWordsOnly(wordsAndPunctuation, targetChar);
 
-        // Сортування слів без розділових знаків
-        ArrayList<StringBuffer> sortedWords = sortWordsOnly(wordsAndPunctuation, targetChar);
-
-        // Повернення слів із збереженими розділовими знаками
         return mergeWordsAndPunctuation(wordsAndPunctuation, sortedWords);
     }
 
-    public static ArrayList<StringBuffer> splitTextAndPunctuation(StringBuffer text) {
-        ArrayList<StringBuffer> wordsAndPunctuation = new ArrayList<>();
+    public static StringBuffer[] splitTextAndPunctuation(StringBuffer text) {
+        StringBuffer[] wordsAndPunctuation = new StringBuffer[text.length()];
+        int count = 0;
         StringBuffer currentPart = new StringBuffer();
         boolean isWord = Character.isLetterOrDigit(text.charAt(0));
 
@@ -60,7 +55,7 @@ public class Main {
             if (Character.isLetterOrDigit(currentChar)) {
                 if (!isWord) {
                     if (currentPart.length() > 0) {
-                        wordsAndPunctuation.add(currentPart);
+                        wordsAndPunctuation[count++] = currentPart;
                     }
                     currentPart = new StringBuffer();
                     isWord = true;
@@ -69,7 +64,7 @@ public class Main {
             } else {
                 if (isWord) {
                     if (currentPart.length() > 0) {
-                        wordsAndPunctuation.add(currentPart);
+                        wordsAndPunctuation[count++] = currentPart;
                     }
                     currentPart = new StringBuffer();
                     isWord = false;
@@ -79,33 +74,51 @@ public class Main {
         }
 
         if (currentPart.length() > 0) {
-            wordsAndPunctuation.add(currentPart);
+            wordsAndPunctuation[count++] = currentPart;
         }
 
-        return wordsAndPunctuation;
+        StringBuffer[] result = new StringBuffer[count];
+        System.arraycopy(wordsAndPunctuation, 0, result, 0, count);
+        return result;
     }
 
-    public static ArrayList<StringBuffer> sortWordsOnly(ArrayList<StringBuffer> wordsAndPunctuation, StringBuffer targetChar) {
-        ArrayList<StringBuffer> words = new ArrayList<>();
+    public static StringBuffer[] sortWordsOnly(StringBuffer[] wordsAndPunctuation, StringBuffer targetChar) {
+        int wordCount = 0;
 
         for (StringBuffer part : wordsAndPunctuation) {
             if (Character.isLetterOrDigit(part.charAt(0))) {
-                words.add(part);
+                wordCount++;
             }
         }
 
-        words.sort((word1, word2) -> countCharOccurrences(word1, targetChar.charAt(0)) - countCharOccurrences(word2, targetChar.charAt(0)));
+        StringBuffer[] words = new StringBuffer[wordCount];
+        int index = 0;
+        for (StringBuffer part : wordsAndPunctuation) {
+            if (Character.isLetterOrDigit(part.charAt(0))) {
+                words[index++] = part;
+            }
+        }
+
+        for (int i = 0; i < words.length - 1; i++) {
+            for (int j = i + 1; j < words.length; j++) {
+                if (countCharOccurrences(words[i], targetChar.charAt(0)) > countCharOccurrences(words[j], targetChar.charAt(0))) {
+                    StringBuffer temp = words[i];
+                    words[i] = words[j];
+                    words[j] = temp;
+                }
+            }
+        }
 
         return words;
     }
 
-    public static StringBuffer mergeWordsAndPunctuation(ArrayList<StringBuffer> original, ArrayList<StringBuffer> sortedWords) {
+    public static StringBuffer mergeWordsAndPunctuation(StringBuffer[] original, StringBuffer[] sortedWords) {
         StringBuffer result = new StringBuffer();
         int wordIndex = 0;
 
         for (StringBuffer part : original) {
             if (Character.isLetterOrDigit(part.charAt(0))) {
-                result.append(sortedWords.get(wordIndex++));
+                result.append(sortedWords[wordIndex++]);
             } else {
                 result.append(part);
             }
