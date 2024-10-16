@@ -59,14 +59,18 @@ public class Main {
             char currentChar = text.charAt(i);
             if (Character.isLetterOrDigit(currentChar)) {
                 if (!isWord) {
-                    wordsAndPunctuation.add(currentPart);
+                    if (currentPart.length() > 0) {
+                        wordsAndPunctuation.add(currentPart);
+                    }
                     currentPart = new StringBuffer();
                     isWord = true;
                 }
                 currentPart.append(currentChar);
             } else {
                 if (isWord) {
-                    wordsAndPunctuation.add(currentPart);
+                    if (currentPart.length() > 0) {
+                        wordsAndPunctuation.add(currentPart);
+                    }
                     currentPart = new StringBuffer();
                     isWord = false;
                 }
@@ -74,7 +78,9 @@ public class Main {
             }
         }
 
-        wordsAndPunctuation.add(currentPart);
+        if (currentPart.length() > 0) {
+            wordsAndPunctuation.add(currentPart);
+        }
 
         return wordsAndPunctuation;
     }
@@ -110,8 +116,9 @@ public class Main {
 
     public static int countCharOccurrences(StringBuffer word, char targetChar) {
         int count = 0;
+        char lowerCaseTargetChar = Character.toLowerCase(targetChar);
         for (int i = 0; i < word.length(); i++) {
-            if (word.charAt(i) == targetChar) {
+            if (Character.toLowerCase(word.charAt(i)) == lowerCaseTargetChar) {
                 count++;
             }
         }
