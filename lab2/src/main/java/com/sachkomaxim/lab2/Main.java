@@ -83,33 +83,34 @@ public class Main {
     }
 
     public static StringBuffer[] sortWordsOnly(StringBuffer[] wordsAndPunctuation, StringBuffer targetChar) {
+        StringBuffer[] words = new StringBuffer[wordsAndPunctuation.length];
         int wordCount = 0;
 
         for (StringBuffer part : wordsAndPunctuation) {
             if (Character.isLetterOrDigit(part.charAt(0))) {
-                wordCount++;
+                words[wordCount++] = part;
             }
         }
 
-        StringBuffer[] words = new StringBuffer[wordCount];
-        int index = 0;
-        for (StringBuffer part : wordsAndPunctuation) {
-            if (Character.isLetterOrDigit(part.charAt(0))) {
-                words[index++] = part;
-            }
-        }
+        StringBuffer[] trimmedWords = new StringBuffer[wordCount];
+        System.arraycopy(words, 0, trimmedWords, 0, wordCount);
 
-        for (int i = 0; i < words.length - 1; i++) {
-            for (int j = i + 1; j < words.length; j++) {
-                if (countCharOccurrences(words[i], targetChar.charAt(0)) > countCharOccurrences(words[j], targetChar.charAt(0))) {
-                    StringBuffer temp = words[i];
-                    words[i] = words[j];
-                    words[j] = temp;
-                }
-            }
-        }
+        stableSort(trimmedWords, targetChar);
 
-        return words;
+        return trimmedWords;
+    }
+
+    private static void stableSort(StringBuffer[] words, StringBuffer targetChar) {
+        for (int i = 1; i < words.length; i++) {
+            StringBuffer key = words[i];
+            int j = i - 1;
+
+            while (j >= 0 && countCharOccurrences(words[j], targetChar.charAt(0)) > countCharOccurrences(key, targetChar.charAt(0))) {
+                words[j + 1] = words[j];
+                j--;
+            }
+            words[j + 1] = key;
+        }
     }
 
     public static StringBuffer mergeWordsAndPunctuation(StringBuffer[] original, StringBuffer[] sortedWords) {
