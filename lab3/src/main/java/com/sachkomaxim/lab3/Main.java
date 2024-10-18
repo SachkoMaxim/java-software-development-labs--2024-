@@ -29,7 +29,7 @@ public class Main {
         System.out.println("\nСтуденти після сортування за іменами (за зростанням) і середнім балом (за спаданням):");
         printStudentsArray(studentsArray);
 
-        Student compareStudent = new Student("Maryna", 20, 83.1, "Computer", 2);
+        Student compareStudent = new Student("Maryna", "Sirko", 20, 83.1, "Computer", 2);
         findAndPrintMatchingStudent(studentsArray, compareStudent);
     }
 
@@ -40,22 +40,22 @@ public class Main {
      */
     private static Student[] createStudentsArray() {
         return new Student[]{
-                new Student("Dmytro", 20, 80.5, "Mathematics", 2),
-                new Student("Maryna", 20, 83.1, "Computer", 2),
-                new Student("Mykhailo", 21, 91.2, "Physics", 3),
-                new Student("Elina", 18, 98.9, "Engineering", 1),
-                new Student("Ruslan", 23, 83.4, "Economics", 4),
-                new Student("Dmytro", 20, 94.6, "Computer", 3),
-                new Student("Anya", 22, 93.6, "Computer", 3),
-                new Student("Maryna", 22, 93.5, "Mathematics", 3),
-                new Student("Maxim", 24, 91.2, "History", 4),
-                new Student("Elina", 19, 92.9, "Computer", 1),
-                new Student("Ruslan", 23, 90.5, "Biology", 2),
-                new Student("Sofia", 20, 87.7, "Chemistry", 1),
-                new Student("Lesya", 20, 95.6, "Biology", 2),
-                new Student("Oleksandr", 21, 94.7, "Physics", 2),
-                new Student("Anya", 23, 90.9, "Engineering", 2),
-                new Student("Sofia", 19, 99.9, "Chemistry", 2)
+                new Student("Dmytro", "Marchenko", 20, 80.5, "Mathematics", 2),
+                new Student("Maryna", "Sirko", 20, 83.1, "Computer", 2),
+                new Student("Mykhailo", "Balakhon", 21, 91.2, "Physics", 3),
+                new Student("Elina", "Yurchenko", 18, 98.9, "Engineering", 1),
+                new Student("Ruslan", "Marchenko", 23, 83.4, "Economics", 4),
+                new Student("Dmytro", "Hryhorash", 20, 94.6, "Computer", 3),
+                new Student("Anya", "Kovalenko", 22, 93.6, "Computer", 3),
+                new Student("Maryna", "Sirko", 22, 93.5, "Mathematics", 3),
+                new Student("Maxim", "Yurchenko", 24, 91.2, "History", 4),
+                new Student("Elina", "Kuts", 19, 92.9, "Computer", 1),
+                new Student("Ruslan", "Dyachok", 23, 90.5, "Biology", 2),
+                new Student("Sofia", "Balakhon", 20, 87.7, "Chemistry", 1),
+                new Student("Lesya", "Vasiliadi", 20, 95.6, "Biology", 2),
+                new Student("Oleksandr", "Bondarenko", 21, 94.7, "Physics", 2),
+                new Student("Anya", "Gorai", 23, 90.9, "Engineering", 2),
+                new Student("Sofia", "Balakhon", 19, 99.9, "Chemistry", 2)
         };
     }
 
@@ -83,7 +83,7 @@ public class Main {
 
     /**
      * Finds and prints the "Student" object that matches the given "compareStudent" object.
-     * The comparison is based on all fields (name, age, GPA, subject, and year).
+     * The comparison is based on all fields (name, surname, age, GPA, subject, and year).
      *
      * @param studentsArray   The array of "Student" objects to search through
      * @param compareStudent  The "Student" object to compare against
@@ -92,7 +92,7 @@ public class Main {
         for (int i = 0; i < studentsArray.length; i++) {
             Student student = studentsArray[i];
             if (compareStudent.equals(student)) {
-                System.out.println("\nПісля сортування знайдено ідентичного студента, тобто compareStudent.equals(studentsArray[" + (i + 1) + "]) = " + student);
+                System.out.println("\nПісля сортування знайдено ідентичного студента: compareStudent.equals(studentsArray[" + (i + 1) + "]) = " + student);
             }
         }
     }

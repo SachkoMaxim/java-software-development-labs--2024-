@@ -7,6 +7,7 @@ package com.sachkomaxim.lab3;
  */
 class Student implements Comparable<Student> {
     private final String name;
+    private final String surname;
     private final int age;
     private final double gpa;
     private final String subject;
@@ -16,13 +17,15 @@ class Student implements Comparable<Student> {
      * Constructor for the "Student" class.
      *
      * @param name      The name of the student
+     * @param surname   The surname of the student
      * @param age       The age of the student
      * @param gpa       The GPA (Grade Point Average) of the student
      * @param subject   The subject of the student
      * @param year      The year of the student
      */
-    public Student(String name, int age, double gpa, String subject, int year) {
+    public Student(String name, String surname, int age, double gpa, String subject, int year) {
         this.name = name;
+        this.surname = surname;
         this.age = age;
         this.gpa = gpa;
         this.subject = subject;
@@ -49,6 +52,7 @@ class Student implements Comparable<Student> {
     public String toString() {
         return "Student{" +
                 "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
                 ", age=" + age +
                 ", gpa=" + gpa +
                 ", subject='" + subject + '\'' +
@@ -60,8 +64,8 @@ class Student implements Comparable<Student> {
      * Overridden equals method for comparing two "Student" objects.
      * <p>
      * This method compares the current "Student" object with another object to determine
-     * if they are equal. Equality is determined by checking if all fields (name, age, gpa,
-     * subject, and year) are the same between both objects.
+     * if they are equal. Equality is determined by checking if all fields (name, surname, age,
+     * gpa, subject, and year) are the same between both objects.
      *
      * @param obj The object to compare with the current "Student" object.
      * @return True if the objects are the same instance or have identical field values;
@@ -75,6 +79,7 @@ class Student implements Comparable<Student> {
         Student student = (Student) obj;
 
         return name.equals(student.name) &&
+                surname.equals(student.surname) &&
                 age == student.age &&
                 Double.compare(gpa, student.gpa) == 0 &&
                 subject.equals(student.subject) &&
@@ -83,6 +88,10 @@ class Student implements Comparable<Student> {
 
     public String getName() {
         return name;
+    }
+
+    public String getSurname() {
+        return surname;
     }
 
     public int getAge() {
