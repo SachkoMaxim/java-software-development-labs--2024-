@@ -8,13 +8,22 @@ package com.sachkomaxim.lab5.tariff;
 public class PremiumTariff extends Tariff {
 
     /**
+     * Minimum allowable monthly fee for premium tariff
+     */
+    private static final double MIN_COST = 270.0;
+
+    /**
+     * Maximum allowable monthly fee for premium tariff
+     */
+    private static final double MAX_COST = 420.0;
+
+    /**
      * The additional minutes included in the premium tariff.
      */
     private final int extraMinutes;
 
     /**
-     * Constructs a PremiumTariff object with the specified name, user count,
-     * monthly fee, additional costs, and extra minutes.
+     * Constructs a PremiumTariff object with the specified parameters.
      *
      * @param name              The name of the premium tariff.
      * @param userCount         The number of users subscribed to the premium tariff.
@@ -23,7 +32,7 @@ public class PremiumTariff extends Tariff {
      * @param extraMinutes      The number of extra minutes included in the premium tariff.
      */
     public PremiumTariff(String name, int userCount, double monthlyFee, double additionalCosts, int extraMinutes) {
-        super(name, userCount, monthlyFee, additionalCosts);
+        super(name, userCount, monthlyFee, additionalCosts, MIN_COST, MAX_COST);
         this.extraMinutes = extraMinutes;
     }
 

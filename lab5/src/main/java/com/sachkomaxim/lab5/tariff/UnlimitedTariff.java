@@ -9,6 +9,16 @@ package com.sachkomaxim.lab5.tariff;
 public class UnlimitedTariff extends Tariff {
 
     /**
+     * Minimum allowable monthly fee for unlimited tariff
+     */
+    private static final double MIN_COST = 420.0;
+
+    /**
+     * Maximum allowable monthly fee for unlimited tariff
+     */
+    private static final double MAX_COST = 900.0;
+
+    /**
      * The additional minutes included in the unlimited tariff.
      */
     private final int extraMinutes;
@@ -19,9 +29,7 @@ public class UnlimitedTariff extends Tariff {
     private final boolean internationalCalls;
 
     /**
-     * Constructs an UnlimitedTariff object with the specified name, user count,
-     * monthly fee, additional costs, extra minutes, and international
-     * calling option.
+     * Constructs an UnlimitedTariff object with the specified parameters.
      *
      * @param name                  The name of the unlimited tariff.
      * @param userCount             The number of users subscribed to the unlimited tariff.
@@ -31,7 +39,7 @@ public class UnlimitedTariff extends Tariff {
      * @param internationalCalls    Indicates if international calls are allowed with the unlimited tariff.
      */
     public UnlimitedTariff(String name, int userCount, double monthlyFee, double additionalCosts, int extraMinutes, boolean internationalCalls) {
-        super(name, userCount, monthlyFee, additionalCosts);
+        super(name, userCount, monthlyFee, additionalCosts, MIN_COST, MAX_COST);
         this.extraMinutes = extraMinutes;
         this.internationalCalls = internationalCalls;
     }

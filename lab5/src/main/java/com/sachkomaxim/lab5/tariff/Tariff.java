@@ -28,17 +28,18 @@ public class Tariff implements Comparable<Tariff> {
     protected final double additionalCosts;
 
     /**
-     * Constructs a Tariff object with the specified name, user count, monthly
-     * fee, and additional costs.
+     * Constructs a Tariff object with the specified parameters.
      *
      * @param name              The name of the tariff.
      * @param userCount         The number of users subscribed to the tariff.
      * @param monthlyFee        The monthly subscription fee for the tariff.
      * @param additionalCosts   The additional costs associated with the tariff.
-     * @throws IllegalArgumentException If userCount, monthlyFee, or additionalCosts
-     *                                  is negative.
+     * @param minCost           The minimum allowable monthly fee for this tariff.
+     * @param maxCost           The maximum allowable monthly fee for this tariff.
+     * @throws IllegalArgumentException If userCount, monthlyFee, or additionalCosts is negative,
+     *                                  or if the monthly fee is not within the specified range.
      */
-    public Tariff(String name, int userCount, double monthlyFee, double additionalCosts) {
+    public Tariff(String name, int userCount, double monthlyFee, double additionalCosts, double minCost, double maxCost) {
         if (userCount < 0) {
             throw new IllegalArgumentException("User count cannot be less than zero");
         }
@@ -49,6 +50,9 @@ public class Tariff implements Comparable<Tariff> {
 
         if (additionalCosts < 0) {
             throw new IllegalArgumentException("Additional costs cannot be less than zero");
+        }
+        if (monthlyFee < minCost || monthlyFee > maxCost) {
+            throw new IllegalArgumentException("Monthly fee must be in range " + minCost + "-" + maxCost);
         }
 
         this.name = name;
@@ -118,7 +122,8 @@ public class Tariff implements Comparable<Tariff> {
     /**
      * Get information about the tariff.
      *
-     * @return A string containing information about the tariff.
+     * @return A string containing the tariff's details including name,
+     *         user count, monthly fee, and additional costs.
      */
     protected String getInfo() {
         return "name='" + name + '\'' +
