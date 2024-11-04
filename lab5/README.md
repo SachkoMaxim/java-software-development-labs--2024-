@@ -28,4 +28,7 @@ java -cp target/lab5-1.0-SNAPSHOT.jar com.sachkomaxim.lab5.Main
 Тобто, треба це все писати тут:
 ![image](https://github.com/user-attachments/assets/b47219d6-ffce-4013-a5a2-ba5eb95e9c6d)
 
+UML-діаграма класів:
+![UML-діаграма](diagram.png)
+
 
