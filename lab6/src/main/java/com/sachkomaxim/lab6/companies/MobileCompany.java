@@ -1,8 +1,7 @@
 package com.sachkomaxim.lab6.companies;
 
 import com.sachkomaxim.lab6.tariff.Tariff;
-
-import java.util.Arrays;
+import com.sachkomaxim.lab6.collections.TariffList;
 
 /**
  * The MobileCompany class represents a mobile company that offers
@@ -11,16 +10,16 @@ import java.util.Arrays;
 public class MobileCompany {
 
     /**
-     * The array of Tariffs offered by the mobile company.
+     * The list of Tariffs offered by the mobile company.
      */
-    private final Tariff[] tariffs;
+    private final TariffList<Tariff> tariffs;
 
     /**
-     * Constructs a MobileCompany object with the specified array of tariffs.
+     * Constructs a MobileCompany object with the specified list of tariffs.
      *
-     * @param tariffs The array of Tariffs to be managed by the mobile company.
+     * @param tariffs The list of Tariffs to be managed by the mobile company.
      */
-    public MobileCompany(Tariff[] tariffs) {
+    public MobileCompany(TariffList<Tariff> tariffs) {
         this.tariffs = tariffs;
     }
 
@@ -51,20 +50,25 @@ public class MobileCompany {
      * Sorts the tariffs by their monthly fee in ascending order.
      */
     public void sortTariffsByMonthlyFee() {
-        Arrays.sort(tariffs);
+        tariffs.sort(Tariff::compareTo);
     }
 
     /**
-     * Finds and returns an array of tariffs with within a specified range of a total service cost.
+     * Finds and returns a list of tariffs with within a specified range of a total service cost.
      *
      * @param min The minimum service cost for the search range.
      * @param max The maximum service cost for the search range.
-     * @return An array of Tariffs whose service costs fall within the specified range.
+     * @return A list of Tariffs whose service costs fall within the specified range.
      */
-    public Tariff[] findTariffsInServiceCostRange(double min, double max) {
-        return Arrays.stream(tariffs)
-                .filter(tariff -> tariff.getServiceCosts() >= min &&
-                        tariff.getServiceCosts() <= max)
-                .toArray(Tariff[]::new);
+    public TariffList<Tariff> findTariffsInServiceCostRange(double min, double max) {
+        TariffList<Tariff> result = new TariffList<>();
+
+        for (Tariff tariff : tariffs) {
+            if (tariff.getServiceCosts() >= min && tariff.getServiceCosts() <= max) {
+                result.add(tariff);
+            }
+        }
+
+        return result;
     }
 }
