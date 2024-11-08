@@ -32,5 +32,5 @@ java -cp target/lab6-1.0-SNAPSHOT.jar com.sachkomaxim.lab6.Main
 ![image](https://github.com/user-attachments/assets/968ca421-2198-4f85-910f-f25c3d172699)
 
 UML-діаграма класів:
-![UML-діаграма]()
+![UML-діаграма](diagram.png)
 
